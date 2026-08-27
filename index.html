@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Destinée 💘</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #08000f;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.box {
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  padding: 30px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 40px rgba(255,0,150,0.3);
+}
+
+h1 {
+  font-size: 30px;
+}
+
+button {
+  border: none;
+  padding: 16px 25px;
+  border-radius: 30px;
+  background: #ff1493;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  box-shadow: 0 0 20px #ff1493;
+}
+
+.loader {
+  width: 70px;
+  height: 70px;
+  margin: 25px auto;
+  border: 6px solid #333;
+  border-top: 6px solid #ff1493;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.progress {
+  width: 100%;
+  height: 10px;
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar {
+  width: 0%;
+  height: 100%;
+  background: #ff1493;
+  transition: width 0.3s;
+}
+
+#recherche,
+#resultat {
+  display: none;
+}
+
+.nom {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff69b4;
+  text-shadow: 0 0 20px #ff1493;
+  animation: apparition 1s ease;
+}
+
+.emoji {
+  position: absolute;
+  font-size: 25px;
+  animation: tomber 3s linear forwards;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes apparition {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tomber {
+  from {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<!-- ACCUEIL -->
+
+<div id="accueil">
+
+<h1>💘 DESTINÉE 💘</h1>
+
+<p>
+Bienvenue sur le système officiel de compatibilité amoureuse.
+</p>
+
+<p>
+Nous allons déterminer une fois pour toutes...
+<br><br>
+
+<b>QUI DOIT ÊTRE TON PETIT AMI. 👀</b>
+</p>
+
+<button onclick="start()">
+DÉCOUVRIR 💖
+</button>
+
+</div>
+
+
+<!-- RECHERCHE -->
+
+<div id="recherche">
+
+<h1>🔮 Analyse en cours...</h1>
+
+<div class="loader"></div>
+
+<p id="message">
+Connexion au destin...
+</p>
+
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+
+<p id="pourcentage">0%</p>
+
+</div>
+
+
+<!-- RESULTAT -->
+
+<div id="resultat">
+
+<h1>⚠️ RÉSULTAT FINAL ⚠️</h1>
+
+<p>
+Après analyse de votre personnalité,
+de votre destinée et des étoiles...
+</p>
+
+<p>
+💘 Votre petit ami obligatoire est :
+</p>
+
+<div class="nom">
+Atsé Nathan ❤️
+</div>
+
+<p>
+Il n'y a malheureusement aucun bouton
+pour contester cette décision. 😭😂
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+function start() {
+
+document.getElementById("accueil").style.display = "none";
+document.getElementById("recherche").style.display = "block";
+
+let messages = [
+"Connexion au destin...",
+"Analyse de votre personnalité...",
+"Recherche dans la base de données...",
+"Analyse des compatibilités...",
+"Interrogation des étoiles... ⭐",
+"Calcul du niveau d'amour...",
+"Détection du candidat...",
+"ATTENTION... résultat inhabituel 😳",
+"Finalisation..."
+];
+
+let i = 0;
+let progress = 0;
+
+let interval = setInterval(function() {
+
+document.getElementById("message").textContent = messages[i];
+
+progress += Math.floor(Math.random() * 12) + 5;
+
+if(progress > 100) progress = 100;
+
+document.getElementById("bar").style.width = progress + "%";
+document.getElementById("pourcentage").textContent = progress + "%";
+
+i++;
+
+if(i >= messages.length) {
+clearInterval(interval);
+}
+
+}, 650);
+
+
+setTimeout(function() {
+
+document.getElementById("recherche").style.display = "none";
+document.getElementById("resultat").style.display = "block";
+
+surprise();
+
+}, 6500);
+
+}
+
+
+function surprise() {
+
+let emojis = ["❤️","💖","💕","💘","✨","😍"];
+
+for(let i = 0; i < 30; i++) {
+
+let e = document.createElement("div");
+
+e.className = "emoji";
+
+e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+e.style.left = Math.random() * 100 + "vw";
+
+e.style.animationDuration =
+(2 + Math.random() * 3) + "s";
+
+document.body.appendChild(e);
+
+setTimeout(() => {
+e.remove();
+}, 5000);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
